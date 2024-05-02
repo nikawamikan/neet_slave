@@ -1,19 +1,21 @@
-export interface Blog {
+export interface Base {
     id: string
-    createdAt: Date // 作成日
-    updatedAt: Date // 更新日
-    publishedAt: Date // 公開日
-    revisedAt: Date // 改訂日
+    createdAt: string // 作成日
+    updatedAt: string // 更新日
+    publishedAt: string // 公開日
+    revisedAt: string // 改訂日
+}
+
+export interface Tag extends Base {
+    name: string // タグ名
+}
+
+export interface Blog extends Base{
     title: string // タイトル
     description: string // 説明
     content: string // 内容
-    tags: { // タグ
-        id: string // タグID
-        createdAt: Date // 作成日
-        updatedAt: Date // 更新日
-        publishedAt: Date // 公開日
-        revisedAt: Date // 改訂日
-        name: string // タグ名
-    }
+    tags: Tag[] // タグ
     writer: string[] // 著者
 }
+
+
