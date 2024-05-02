@@ -7,11 +7,8 @@ import {
     NavbarItem,
     NavbarMenuItem,
 } from "@nextui-org/navbar"
-import { useState } from "react"
-import { Button } from "@nextui-org/button"
-import { Kbd } from "@nextui-org/kbd"
+import { ThemeSwitch } from "@/components/theme-switch"
 import { Link } from "@nextui-org/link"
-import { Input } from "@nextui-org/input"
 
 import { link as linkStyles } from "@nextui-org/theme"
 
@@ -19,7 +16,6 @@ import { siteConfig } from "@/config/site"
 import NextLink from "next/link"
 import clsx from "clsx"
 
-import { SearchIcon } from "@/components/icons"
 
 import { Logo } from "@/components/icons"
 
@@ -58,6 +54,9 @@ export const Navbar = () => {
                 </ul>
             </NavbarContent>
 
+            <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
+                <ThemeSwitch />
+            </NavbarContent>
             <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
                 <NavbarMenuToggle />
             </NavbarContent>
