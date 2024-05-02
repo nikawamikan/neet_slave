@@ -15,6 +15,16 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      animation: {
+        itemspin: "itemspin 3s linear infinite",
+      },
+      keyframes: {
+        itemspin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '50%': { transform: 'rotate(180deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        }
+      }
     },
   },
   plugins: [nextui()],
