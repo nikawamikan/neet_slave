@@ -40,7 +40,7 @@ export default function RootLayout({
                 )}
             >
                 <Providers
-                    themeProps={{ attribute: "class", defaultTheme: "dark" }}
+                    themeProps={{ attribute: "class", defaultTheme: "media" }}
                 >
                     <div className="relative flex h-screen flex-col">
                         <Navbar />
