@@ -1,9 +1,6 @@
-"use client"
-
-import React from "react"
 import Image from "next/image" // Import the Image component from next/image
-
 function Test() {
+    fetch("https://api.example.com")
     return (
         <div className="relative h-60 w-full">
             <div
