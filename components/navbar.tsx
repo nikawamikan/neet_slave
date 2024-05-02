@@ -7,6 +7,7 @@ import {
     NavbarItem,
     NavbarMenuItem,
 } from "@nextui-org/navbar"
+import { useState } from "react"
 import { Button } from "@nextui-org/button"
 import { Kbd } from "@nextui-org/kbd"
 import { Link } from "@nextui-org/link"
@@ -23,26 +24,20 @@ import { SearchIcon } from "@/components/icons"
 import { Logo } from "@/components/icons"
 
 export const Navbar = () => {
-    const searchInput = (
-        <Input
-            aria-label="Search"
-            classNames={{
-                inputWrapper: "bg-default-100",
-                input: "text-sm",
-            }}
-            endContent={
-                <Kbd className="hidden lg:inline-block" keys={["command"]}>
-                    K
-                </Kbd>
-            }
-            labelPlacement="outside"
-            placeholder="Search..."
-            startContent={
-                <SearchIcon className="pointer-events-none flex-shrink-0 text-base text-default-400" />
-            }
-            type="search"
-        />
-    )
+    const menu = siteConfig.navItems.map((item) => (
+        <NavbarItem key={item.href}>
+            <NextLink
+                className={clsx(
+                    linkStyles({ color: "foreground" }),
+                    "data-[active=true]:font-medium data-[active=true]:text-primary"
+                )}
+                color="foreground"
+                href={item.href}
+            >
+                {item.label}
+            </NextLink>
+        </NavbarItem>
+    ))
 
     return (
         <NextUINavbar maxWidth="xl" position="sticky">
@@ -53,26 +48,13 @@ export const Navbar = () => {
                         href="/"
                     >
                         <Logo />
-                        <p className="font-bold text-inherit">ACME</p>
+                        <p className="font-bold text-inherit">Slave & Neet</p>
                     </NextLink>
                 </NavbarBrand>
             </NavbarContent>
             <NavbarContent className="sm:basis-full" justify="center">
                 <ul className="ml-2 hidden justify-start gap-4 md:flex">
-                    {siteConfig.navItems.map((item) => (
-                        <NavbarItem key={item.href}>
-                            <NextLink
-                                className={clsx(
-                                    linkStyles({ color: "foreground" }),
-                                    "data-[active=true]:font-medium data-[active=true]:text-primary"
-                                )}
-                                color="foreground"
-                                href={item.href}
-                            >
-                                {item.label}
-                            </NextLink>
-                        </NavbarItem>
-                    ))}
+                    {menu}
                 </ul>
             </NavbarContent>
 
@@ -81,7 +63,6 @@ export const Navbar = () => {
             </NavbarContent>
 
             <NavbarMenu>
-                {searchInput}
                 <div className="mx-4 mt-2 flex flex-col gap-2">
                     {siteConfig.navMenuItems.map((item, index) => (
                         <NavbarMenuItem key={`${item}-${index}`}>
