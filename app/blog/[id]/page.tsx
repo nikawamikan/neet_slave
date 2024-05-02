@@ -1,5 +1,6 @@
 import { cmsClient } from "@/lib/microcms"
-import { Blog } from "@/model/microcms"
+import { Blog } from "@/models/microcms"
+
 type Params = {
     id: string
 }
@@ -9,8 +10,6 @@ export async function generateStaticParams() {
         endpoint: "blog",
         queries: { fields: "id" },
     })
-    console.log(data)
-
     // ページIDをすべて取得して返す
     return data
 }
@@ -20,7 +19,6 @@ export default async function Page(params: { params: Params }) {
         endpoint: "blog",
         contentId: params.params.id,
     })
-    console.log(data.createdAt.toString())
     return (
         <>
             <div>title: {data.title}</div>
