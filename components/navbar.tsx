@@ -1,3 +1,5 @@
+"use client"
+
 import {
     Navbar as NextUINavbar,
     NavbarContent,
@@ -11,15 +13,20 @@ import { ThemeSwitch } from "@/components/theme-switch"
 import { Link } from "@nextui-org/link"
 
 import { link as linkStyles } from "@nextui-org/theme"
+import { useReducer } from "react"
 
 import { siteConfig } from "@/config/site"
 import NextLink from "next/link"
 import clsx from "clsx"
 
-
 import { Logo } from "@/components/icons"
 
 export const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useReducer(
+        (current: boolean) => !current,
+        false
+    )
+
     const menu = siteConfig.navItems.map((item) => (
         <NavbarItem key={item.href}>
             <NextLink
@@ -36,7 +43,12 @@ export const Navbar = () => {
     ))
 
     return (
-        <NextUINavbar maxWidth="xl" position="sticky">
+        <NextUINavbar
+            maxWidth="xl"
+            position="sticky"
+            isMenuOpen={isMenuOpen}
+            onMenuOpenChange={setIsMenuOpen}
+        >
             <NavbarContent className="fixed" justify="start">
                 <NavbarBrand as="li" className="max-w-fit gap-3">
                     <NextLink
@@ -57,24 +69,18 @@ export const Navbar = () => {
             <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
                 <ThemeSwitch />
             </NavbarContent>
+
             <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
                 <NavbarMenuToggle />
             </NavbarContent>
 
             <NavbarMenu>
                 <div className="mx-4 mt-2 flex flex-col gap-2">
-                    {siteConfig.navMenuItems.map((item, index) => (
-                        <NavbarMenuItem key={`${item}-${index}`}>
+                    {siteConfig.navItems.map((item, index) => (
+                        <NavbarMenuItem key={`${item.label}-${index}`}>
                             <Link
-                                color={
-                                    index === 2
-                                        ? "primary"
-                                        : index ===
-                                            siteConfig.navMenuItems.length - 1
-                                          ? "danger"
-                                          : "foreground"
-                                }
-                                href="#"
+                                onPress={() => setIsMenuOpen()}
+                                href={item.href}
                                 size="lg"
                             >
                                 {item.label}
