@@ -21,6 +21,9 @@ export const siteConfig = {
 			href: "/about",
 		},
 	],
+	siteItems: {
+		slaveBlog: "/slave-blog/post",
+	},
 	links: {
 		github: "https://github.com/nextui-org/nextui",
 		twitter: "https://twitter.com/getnextui",
