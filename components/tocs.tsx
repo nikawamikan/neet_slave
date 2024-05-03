@@ -1,4 +1,21 @@
+"use client"
+
 import * as cheerio from "cheerio"
+import { Link } from "@nextui-org/link"
+import React, { useState, useEffect } from "react"
+import { throttle } from "lodash"
+
+const Scroll = () => {
+    const [scrollY, setScrollY] = useState(0)
+    const handleScroll = throttle(() => {
+        setScrollY(window.scrollY)
+    }, 100)
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+    }, [])
+    return scrollY
+}
 
 const renderToc = (body: string) => {
     const $ = cheerio.load(body)
@@ -25,14 +42,23 @@ function TocItem(props: { data: { name: string; id: string; text: string } }) {
     // レベルに応じてインデントをつける
     return (
         <li className={indent}>
-            <a href={`#${data.id}`}>{data.text}</a>
+            <Link className="text-8xl" href={`#${data.id}`}>
+                {data.text}
+            </Link>
         </li>
     )
 }
 
 export function Toc(props: { body: string }) {
+    const scrollY = Scroll()
     const { body } = props
     const toc = renderToc(body)
+    if (typeof document !== "undefined") {
+        const test = toc.map((data) => document.getElementById(data.id))
+        test.map((data) =>
+            console.log(`id ${data?.id}, y :${data?.getBoundingClientRect().y}`)
+        )
+    }
     return (
         <aside className="top-20">
             <h2 className="text-lg font-bold">目次</h2>
