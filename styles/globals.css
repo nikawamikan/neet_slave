@@ -5,21 +5,3 @@
 html {
     @apply scroll-pt-24;
 }
-
-a {
-    @apply text-blue-500 underline;
-}
-
-h2, h3, h4, h5, h6 {
-    @apply font-bold mb-2 mt-4 text-gray-800 ;
-}
-
-h1 {
-    @apply text-2xl font-bold mb-2 mt-2;
-}
-
-h2 {
-    @apply text-xl font-bold mb-2 mt-8 ;
-}
-
-
