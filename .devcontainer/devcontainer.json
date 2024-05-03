@@ -18,7 +18,8 @@
 				"ms-azuretools.vscode-docker",
 				"esbenp.prettier-vscode",
 				"bradlc.vscode-tailwindcss",
-				"rvest.vs-code-prettier-eslint"
+				"rvest.vs-code-prettier-eslint",
+				"mhutchie.git-graph"
 			]
 		}
 	},
