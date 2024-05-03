@@ -24,8 +24,8 @@ export default async function Page({ params }: { params: { id: string } }) {
         <>
             <h1 className={title()}>{data.title}</h1>
             <div className="mt-8 flex flex-col">
-                <span className="w-1/2">公開日: {toJpDateStr(data.publishedAt)}</span>
-                <span className="w-1/2">更新日: {toJpDateStr(data.revisedAt)}</span>
+                <span>公開日: {toJpDateStr(data.publishedAt)}</span>
+                <span>更新日: {toJpDateStr(data.revisedAt)}</span>
             </div>
             <br />
             <span className={subtitle()}>{data.description}</span>
