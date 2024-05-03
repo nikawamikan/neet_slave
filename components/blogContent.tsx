@@ -2,6 +2,8 @@ import { Blog } from "@/models/microcms"
 import { load } from "cheerio"
 import hljs from "highlight.js"
 import "highlight.js/styles/tokyo-night-dark.css"
+import "@/styles/blog.css"
+
 // import "@/styles/blog.css"
 
 export function BlogContent(params: { data: Blog }) {
@@ -26,6 +28,9 @@ export function BlogContent(params: { data: Blog }) {
     const content = $.html()
 
     return (
-        <div className="mb-36" dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+            className="blogContent mb-36"
+            dangerouslySetInnerHTML={{ __html: content }}
+        />
     )
 }
