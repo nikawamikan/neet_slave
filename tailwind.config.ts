@@ -31,18 +31,60 @@ const config: Config = {
     themes: {
       light: {
         colors: {
-          background: "#F4F7F7",
-          primary: "#0070f3",
-          secondary: "#ff0080",
+          background: "#f4faff",
+          foreground: "#373535",
+          divider: "#c1c7cc",
+          focus: "#FFA500",
+          primary: {
+            DEFAULT: "#3778b8",
+            foreground: "#d8ffff",
+          },
+          secondary: {
+            DEFAULT: "#ff7600",
+            foreground: "#904a00",
+          },
+          // success: {
+          //   DEFAULT: "#00c851",
+          //   foreground: "#F4F7F7",
+          // },
+          // warning: {
+          //   DEFAULT: "#ffbb33",
+          //   foreground: "#F4F7F7",
+          // },
+          // danger: {
+          //   DEFAULT: "#ff4444",
+          //   foreground: "#F4F7F7",
+          // },
         }
       },
       dark: {
         colors: {
-          background: "#111111",
-          primary: "#0070f3",
-          secondary: "#ff0080",
+          background: "#0B1E3F",
+          foreground: "#efefef",
+          divider: "#c1c7cc",
+          focus: "#FFA500",
+          primary: {
+            DEFAULT: "#3676c6",
+            foreground: "#dbffff",
+          },
+          secondary: {
+            DEFAULT: "#ff7600",
+            foreground: "#8d1000",
+          },
+          // success: {
+          //   DEFAULT: "#00c851",
+          //   foreground: "#F4F7F7",
+          // },
+          // warning: {
+          //   DEFAULT: "#ffbb33",
+          //   foreground: "#F4F7F7",
+          // },
+          // danger: {
+          //   DEFAULT: "#ff4444",
+          //   foreground: "#F4F7F7",
+          // },
         }
-      },
+      }
     }
   })],
 };
