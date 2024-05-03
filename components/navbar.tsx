@@ -49,7 +49,7 @@ export const Navbar = () => {
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
         >
-            <NavbarContent className="fixed" justify="start">
+            <NavbarContent className="basis-1/4" justify="start">
                 <NavbarBrand as="li" className="max-w-fit gap-3">
                     <NextLink
                         className="flex items-center justify-start gap-1"
@@ -60,25 +60,27 @@ export const Navbar = () => {
                     </NextLink>
                 </NavbarBrand>
             </NavbarContent>
-            <NavbarContent className="sm:basis-full" justify="center">
+
+            <NavbarContent className="sm:basis-1/2" justify="center">
                 <ul className="ml-2 hidden justify-start gap-4 md:flex">
                     {menu}
                 </ul>
             </NavbarContent>
 
-            <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
+            <NavbarContent className="basis-1/4" justify="end">
                 <ThemeSwitch />
-            </NavbarContent>
-
-            <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
-                <NavbarMenuToggle />
+                <NavbarMenuToggle className="md:hidden" />
             </NavbarContent>
 
             <NavbarMenu>
-                <div className="mx-4 mt-2 flex flex-col gap-2">
+                <div className="mx-4 mt-20 flex flex-col gap-2">
                     {siteConfig.navItems.map((item, index) => (
-                        <NavbarMenuItem key={`${item.label}-${index}`}>
+                        <NavbarMenuItem
+                            className="text-center"
+                            key={`${item.label}-${index}`}
+                        >
                             <Link
+                                color="secondary"
                                 onPress={() => setIsMenuOpen()}
                                 href={item.href}
                                 size="lg"
