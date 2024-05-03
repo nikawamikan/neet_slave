@@ -5,7 +5,7 @@ export default function BlogLayout({
 }) {
     return (
         <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-            <div className="inline-block max-w-3xl justify-center text-center">
+            <div className="inline-block max-w-7xl justify-center text-center">
                 {children}
             </div>
         </section>
