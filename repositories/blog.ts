@@ -42,4 +42,17 @@ export async function fetchNeetBlogIds() {
     if (data) {
         return data
     }
-}   
+}
+
+export async function fetchBlogDetails(writer: string) {
+    try {
+        const response: { contents: Blog[] } = await cmsClient.get({
+            endpoint: 'blog',
+            queries: { filters: `writer[contains]${writer}`, fields: 'id,title,description,thumbnail,publishedAt' },
+        })
+        return response.contents
+
+    } catch (error) {
+        console.error('Error retrieving blog ids:', error);
+    }
+}
