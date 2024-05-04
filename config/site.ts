@@ -10,11 +10,11 @@ export const siteConfig = {
 		},
 		{
 			label: "SlaveBlog",
-			href: "/slave-blog",
+			href: "/slave-blog/1",
 		},
 		{
 			label: "NeetBlog",
-			href: "/neet-blog",
+			href: "/neet-blog/1",
 		},
 		{
 			label: "About",
@@ -23,6 +23,7 @@ export const siteConfig = {
 	],
 	siteItems: {
 		slaveBlog: "/slave-blog/post",
+		neetBlog: "/neet-blog/post",
 	},
 	links: {
 		github: "https://github.com/nextui-org/nextui",
