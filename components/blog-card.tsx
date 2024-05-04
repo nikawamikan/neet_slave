@@ -1,6 +1,8 @@
 import React from "react"
 import { Card, CardHeader, CardBody } from "@nextui-org/card"
-import { Image } from "@nextui-org/image"
+// import Image from "next/image"
+import { Image } from "@/components/image"
+// import { Image } from "@nextui-org/image"
 import NextLink from "next/link"
 import { siteConfig } from "@/config/site"
 
@@ -23,7 +25,8 @@ export function BlogCard({
                         alt="Card background"
                         className="rounded-xl object-cover"
                         src={imageUrl}
-                        width={270}
+                        width={320}
+                        height={200}
                     />
                 </CardBody>
             </Card>
