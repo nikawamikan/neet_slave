@@ -8,7 +8,7 @@ import "@/styles/blog.css"
 
 export function BlogContent(params: { data: Blog }) {
     const { data } = params
-    let content = ""
+    let content = data.content
     if (!data.content) {
         content = "記事ないっぽい"
     }
