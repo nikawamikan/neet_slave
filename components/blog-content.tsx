@@ -1,4 +1,4 @@
-import { Blog } from "@/models/microcms"
+import { Blog } from "@/types/microcms"
 import { load } from "cheerio"
 import hljs from "highlight.js"
 import "highlight.js/styles/tokyo-night-dark.css"
@@ -8,7 +8,11 @@ import "@/styles/blog.css"
 
 export function BlogContent(params: { data: Blog }) {
     const { data } = params
-    const $ = load(data.content)
+    let content = ""
+    if (!data.content) {
+        content = "記事ないっぽい"
+    }
+    const $ = load(content)
     $("pre code").each((_, elm) => {
         const className = $(elm).attr("class")
         const language = className?.replace("language-", "")
@@ -25,7 +29,7 @@ export function BlogContent(params: { data: Blog }) {
         $(elm).html(result.value)
         $(elm).addClass("hljs")
     })
-    const content = $.html()
+    content = $.html()
 
     return (
         <div
