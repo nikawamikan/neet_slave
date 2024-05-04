@@ -24,5 +24,3 @@ export interface Blog extends Base {
     writer: string[] // 著者
     thumbnail: Thumbnail // サムネイル
 }
-
-
