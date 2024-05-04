@@ -1,9 +1,7 @@
-import { fetchSlaveBlogIds, fetchBlogById } from "@/repositories/blog"
+import { fetchSlaveBlogIds, fetchBlogContent } from "@/services/blog"
 import { title, subtitle } from "@/components/primitives"
-import { Toc } from "@/components/tocs"
 import { BlogContent } from "@/components/blog-content"
 import { toJpDateStr } from "@/lib/date"
-import { TableOfContents } from "@/components/testtoc"
 
 export async function generateStaticParams() {
     const ids = await fetchSlaveBlogIds()
@@ -17,7 +15,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
-    const data = await fetchBlogById(id)
+    const data = await fetchBlogContent(id)
     if (!data) {
         return <div>Not Found</div>
     }
@@ -28,13 +26,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                 <span>公開日: {toJpDateStr(data.publishedAt)}</span>
                 <span>更新日: {toJpDateStr(data.revisedAt)}</span>
             </div>
-            <br />
             <span className={subtitle()}>{data.description}</span>
-            <br />
-            {/* <Toc body={data.content} /> */}
-            <br />
             <BlogContent data={data} />
-            <br />
         </>
     )
 }

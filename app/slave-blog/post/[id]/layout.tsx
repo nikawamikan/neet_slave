@@ -1,6 +1,5 @@
 import { TableOfContents } from "@/components/testtoc"
-
-export default function BlogLayout({
+export default async function BlogLayout({
     children,
 }: {
     children: React.ReactNode
