@@ -34,7 +34,7 @@ export async function fetchBlogDetails(writer: string, limit: number, offset: nu
     try {
         const response: { contents: Blog[] } = await cmsClient.get({
             endpoint: 'blog',
-            queries: { filters: `writer[contains]${writer}`, fields: 'id,title,description,thumbnail,publishedAt', limit: limit, offset: offset },
+            queries: { filters: `writer[contains]${writer}`, fields: 'id,title,description,thumbnail,publishedAt,writer', limit: limit, offset: offset },
         })
         return response.contents
 
