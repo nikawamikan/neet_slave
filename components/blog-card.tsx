@@ -4,16 +4,21 @@ import { Card, CardHeader, CardBody } from "@nextui-org/card"
 import { Image } from "@/components/image"
 // import { Image } from "@nextui-org/image"
 import NextLink from "next/link"
-import { siteConfig } from "@/config/site"
 
 export function BlogCard({
     params,
 }: {
-    params: { id: string; imageUrl: string; title: string; date: string }
+    params: {
+        baseUrl: string
+        id: string
+        imageUrl: string
+        title: string
+        date: string
+    }
 }) {
-    const { id, imageUrl, title, date } = params
+    const { baseUrl, id, imageUrl, title, date } = params
     return (
-        <NextLink href={`${siteConfig.siteItems.slaveBlog}/${id}`} passHref>
+        <NextLink href={`${baseUrl}/${id}`} passHref>
             <Card className="py-4">
                 <CardHeader className="flex-col items-start px-4 pb-0 pt-2">
                     {/* ここらへんにタグつける */}
