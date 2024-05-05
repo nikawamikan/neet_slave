@@ -34,8 +34,8 @@ export const siteConfig = {
         sponsor: "https://patreon.com/jrgarciadev",
     },
     ogpBaseImages: {
-        top: "https://mikan-box.imgix.net/bankan27.png",
-        slaveBlog: "https://mikan-box.imgix.net/bankan27.png",
-        neetBlog: "https://mikan-box.imgix.net/bankan27.png",
+        top: "https://mikan-box.imgix.net/LowSaturationSlaveBlogOGP.png",
+        slaveBlog: "https://mikan-box.imgix.net/LowSaturationSlaveBlogOGP.png",
+        neetBlog: "https://mikan-box.imgix.net/LowSaturationSlaveBlogOGP.png",
     },
 }
