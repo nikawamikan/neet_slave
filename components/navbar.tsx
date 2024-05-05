@@ -46,6 +46,7 @@ export const Navbar = () => {
         <NextUINavbar
             maxWidth="xl"
             position="sticky"
+            className="font-makinas"
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
         >
@@ -68,7 +69,7 @@ export const Navbar = () => {
             </NavbarContent>
 
             <NavbarContent className="basis-1/4" justify="end">
-                <ThemeSwitch />
+                <ThemeSwitch className="transition-all hover:animate-wiggle" />
                 <NavbarMenuToggle className="md:hidden" />
             </NavbarContent>
 
