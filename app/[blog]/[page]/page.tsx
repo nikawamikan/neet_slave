@@ -44,8 +44,10 @@ export async function generateMetadata({
             url: `https://neet-slave-blog.com/${blog}/${page}`,
             images: [
                 GenerateOGPImage(
-                    "https://images.microcms-assets.io/assets/b6be5a57dddb439bbfb30582b2bbccd5/4ff5c510173547fdba97b663fc44d042/image.png",
-                    "とりあえずブログを書いてみた件"
+                    siteConfig.ogpBaseImages.top,
+                    "ブログ一覧ページ",
+                    "ここは社畜のブログページ なんにもいいことないけど 見ていってね",
+                    "SlaveBlog"
                 ),
             ],
             siteName: "Neet Slave Blog",
