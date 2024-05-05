@@ -10,7 +10,6 @@ import {
     NavbarMenuItem,
 } from "@nextui-org/navbar"
 import { ThemeSwitch } from "@/components/theme-switch"
-import { Link } from "@nextui-org/link"
 
 import { link as linkStyles } from "@nextui-org/theme"
 import { useReducer } from "react"
@@ -74,20 +73,22 @@ export const Navbar = () => {
             </NavbarContent>
 
             <NavbarMenu>
-                <div className="mx-4 mt-20 flex flex-col gap-2">
+                <div className="mx-4 mt-32 flex flex-col gap-2">
                     {siteConfig.navItems.map((item, index) => (
                         <NavbarMenuItem
                             className="text-center"
                             key={`${item.label}-${index}`}
                         >
-                            <Link
-                                color="secondary"
-                                onPress={() => setIsMenuOpen()}
+                            <NextLink
+                                className={clsx(
+                                    linkStyles({ color: "foreground" }),
+                                    "mb-6 font-makinas text-2xl"
+                                )}
+                                onClick={() => setIsMenuOpen()}
                                 href={item.href}
-                                size="lg"
                             >
                                 {item.label}
-                            </Link>
+                            </NextLink>
                         </NavbarMenuItem>
                     ))}
                 </div>
