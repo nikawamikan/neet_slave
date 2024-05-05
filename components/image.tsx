@@ -16,6 +16,7 @@ function imgixLoader({ src, width, height, quality }: Prop) {
     if (typeof width === "string" || typeof height === "string") return src
     const url = new URL(src)
     const params = url.searchParams
+    params.set("auto", params.get("auto") || "compress")
     params.set("fit", params.get("fit") || "crop")
     params.set("w", params.get("w") || width.toString())
     if (height) params.set("h", params.get("h") || height.toString())
