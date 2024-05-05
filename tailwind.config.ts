@@ -13,7 +13,9 @@ const config: Config = {
         extend: {
             fontFamily: {
                 makinas: ["var(--font-makinas)"],
-                mrounded: ["var(--font-mrounded"],
+                notesans: ["var(--font-notesans)"],
+                mamelon: ["var(--font-mamelon)"],
+                kimberalla: ["var(--font-kimberalla)"],
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
