@@ -11,6 +11,10 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                makinas: ["var(--font-makinas)"],
+                mrounded: ["var(--font-mrounded"],
+            },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 "gradient-conic":
