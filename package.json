@@ -25,10 +25,12 @@
 		"@nextui-org/theme": "2.2.0",
 		"@react-aria/ssr": "^3.9.2",
 		"@react-aria/visually-hidden": "^3.8.10",
+		"@types/base64-url": "^2.2.2",
 		"@types/node": "20.5.7",
 		"@types/react": "18.2.21",
 		"@types/react-dom": "18.2.7",
 		"autoprefixer": "10.4.19",
+		"base64-url": "^2.3.3",
 		"cheerio": "1.0.0-rc.12",
 		"clsx": "^2.1.1",
 		"eslint": "8.48.0",
@@ -46,6 +48,7 @@
 		"tailwind-variants": "^0.1.20",
 		"tailwindcss": "3.4.3",
 		"tocbot": "^4.27.18",
+		"ts-node": "^10.9.2",
 		"typescript": "5.0.4"
 	},
 	"devDependencies": {
