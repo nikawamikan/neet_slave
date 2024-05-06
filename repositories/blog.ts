@@ -1,43 +1,61 @@
 import { cmsClient } from "@/lib/microcms"
-import { Blog } from "@/types/microcms";
+import { Blog } from "@/types/microcms"
+
+// すべてのブログ記事を取得する
+export async function fetchAllBlogs(writer: string) {
+    try {
+        const response: Blog[] = await cmsClient.getAllContents({
+            endpoint: "blog",
+            queries: { filters: `writer[contains]${writer}` },
+        })
+        return response
+    } catch (error) {
+        return []
+    }
+}
 
 // 特定のIDのブログ記事を取得する
 export async function fetchBlogById(id: string) {
     try {
         const response: Blog = await cmsClient.get({
-            endpoint: 'blog',
+            endpoint: "blog",
             contentId: id,
         })
         return response
-
     } catch (error) {
-        console.error('Error retrieving blog elements:', error);
+        console.error("Error retrieving blog elements:", error)
     }
 }
 
 // 特定のユーザーのブログ記事のIDを全て取得する
 export async function fetchAllBlogIds(writer: string) {
-    try {
-        const response: Blog[] = await cmsClient.getAllContents({
-            endpoint: 'blog',
-            queries: { filters: `writer[contains]${writer}`, fields: 'id' },
-        })
-        return response.map((blog) => blog.id)
-
-    } catch (error) {
-        return []
-    }
-
+    return fetchAllBlogs(writer).then((blogs) => blogs.map((blog) => blog.id))
 }
 
-export async function fetchBlogDetails(writer: string, limit: number, offset: number) {
+// ブログのTAG一覧を取得する
+export async function fetchBlogTags(writer: string) {
+    const blogs = await fetchAllBlogs(writer)
+    const tags = blogs.map((blog) => blog.tags).flat()
+    return Array.from(new Set(tags))
+}
+
+// ブログ記事の一覧を取得する
+export async function fetchBlogDetails(
+    writer: string,
+    limit: number,
+    offset: number
+) {
     try {
         const response: { contents: Blog[] } = await cmsClient.get({
-            endpoint: 'blog',
-            queries: { filters: `writer[contains]${writer}`, fields: 'id,title,description,thumbnail,publishedAt,writer', limit: limit, offset: offset },
+            endpoint: "blog",
+            queries: {
+                filters: `writer[contains]${writer}`,
+                fields: "id,title,description,thumbnail,publishedAt,writer,tags",
+                limit: limit,
+                offset: offset,
+            },
         })
         return response.contents
-
     } catch (error) {
         return []
     }
