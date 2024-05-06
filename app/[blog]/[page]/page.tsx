@@ -33,7 +33,6 @@ export async function generateMetadata({
     params: { blog: string; page: string }
 }): Promise<Metadata> {
     const { blog, page } = params
-    console.log(blog, page)
     return {
         title: blog,
         description: "ブログ一覧ページ",
