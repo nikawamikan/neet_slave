@@ -1,6 +1,7 @@
 import { Config } from "tailwindcss"
 import { nextui } from "@nextui-org/theme"
 import { themes } from "./config/theme"
+import typography from "@tailwindcss/typography"
 
 const config: Config = {
     content: [
@@ -16,6 +17,8 @@ const config: Config = {
                 notesans: ["var(--font-notesans)"],
                 mamelon: ["var(--font-mamelon)"],
                 kimberalla: ["var(--font-kimberalla)"],
+                dotgothic16: ["var(--font-dotgothic16)"],
+                mplusrounded1c: ["var(--font-mplusrounded1c)"],
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -43,6 +46,7 @@ const config: Config = {
         nextui({
             themes: themes,
         }),
+        typography,
     ],
 }
 export default config
