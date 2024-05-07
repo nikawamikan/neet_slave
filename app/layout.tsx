@@ -7,11 +7,17 @@ import {
     noteSans,
     mamelon,
     kimberalla,
+    dotGothic16,
+    mRound,
 } from "@/config/fonts"
 import { Providers } from "./providers"
 import { Navbar } from "@/components/navbar"
 import { Link } from "@nextui-org/link"
 import clsx from "clsx"
+import { dot } from "node:test/reporters"
+
+// すべてキャッシュからデータを取得するようにするハズです。
+export const fetchCache = "only-cache"
 
 export const metadata: Metadata = {
     title: {
@@ -46,7 +52,9 @@ export default function RootLayout({
                     noteSans.variable,
                     makinas.variable,
                     fontSans.variable,
-                    kimberalla.variable
+                    kimberalla.variable,
+                    dotGothic16.variable,
+                    mRound.variable
                 )}
             >
                 <Providers
