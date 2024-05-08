@@ -39,8 +39,24 @@ export async function fetchBlogTags(writer: string) {
     return Array.from(new Set(tags))
 }
 
+// タグごとにブログ記事の一覧を取得する
+export async function fetchBlogListByTag(writer: string, tag_id: string) {
+    try {
+        const response: Blog[] = await cmsClient.getAllContents({
+            endpoint: "blog",
+            queries: {
+                filters: `tags[contains]${tag_id},writer[contains]${writer}`,
+                fields: "id,title,description,thumbnail,publishedAt,writer,tags",
+            },
+        })
+        return response
+    } catch (error) {
+        return []
+    }
+}
+
 // ブログ記事の一覧を取得する
-export async function fetchBlogDetails(
+export async function fetchBlogList(
     writer: string,
     limit: number,
     offset: number
