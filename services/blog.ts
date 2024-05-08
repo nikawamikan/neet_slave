@@ -1,18 +1,29 @@
 import * as repo from "@/repositories/blog"
 
-export async function fetchSlaveBlogDetails(limit: number, offset: number) {
-    return await repo.fetchBlogDetails("nikawamikan", limit, offset)
+const SLAVE = "nikawamikan"
+const NEET = "nantka"
+
+export async function fetchSlaveBlogList(limit: number, offset: number) {
+    return await repo.fetchBlogList(SLAVE, limit, offset)
 }
-export async function fetchNeetBlogDetails(limit: number, offset: number) {
-    return await repo.fetchBlogDetails("nantka", limit, offset)
+export async function fetchNeetBlogList(limit: number, offset: number) {
+    return await repo.fetchBlogList(NEET, limit, offset)
+}
+
+export async function fetchSlaveBlogListByTag(tag_id: string) {
+    return await repo.fetchBlogListByTag(SLAVE, tag_id)
+}
+
+export async function fetchNeetBlogListByTag(tag_id: string) {
+    return await repo.fetchBlogListByTag(NEET, tag_id)
 }
 
 export function fetchSlaveBlogIds() {
-    return repo.fetchAllBlogIds("nikawamikan")
+    return repo.fetchAllBlogIds(SLAVE)
 }
 
 export function fetchNeetBlogIds() {
-    return repo.fetchAllBlogIds("nantka")
+    return repo.fetchAllBlogIds(NEET)
 }
 
 async function countBlogContent(writer: string) {
@@ -20,11 +31,11 @@ async function countBlogContent(writer: string) {
 }
 
 export async function countSlaveBlogContent() {
-    return countBlogContent("nikawamikan")
+    return countBlogContent(SLAVE)
 }
 
 export async function countNeetBlogContent() {
-    return countBlogContent("nantka")
+    return countBlogContent(NEET)
 }
 
 async function countPage(writer: string) {
@@ -34,13 +45,21 @@ async function countPage(writer: string) {
 }
 
 export async function countSlavePage() {
-    return countPage("nikawamikan")
+    return countPage(SLAVE)
 }
 
 export async function countNeetPage() {
-    return countPage("nantka")
+    return countPage(NEET)
 }
 
 export async function fetchBlogContent(id: string) {
     return await repo.fetchBlogById(id)
+}
+
+export async function fetchSlaveBlogTags() {
+    return await repo.fetchBlogTags(SLAVE)
+}
+
+export async function fetchNeetBlogTags() {
+    return await repo.fetchBlogTags(NEET)
 }
