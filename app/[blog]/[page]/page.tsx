@@ -1,8 +1,8 @@
 import { title } from "@/components/primitives"
 import type { Metadata, ResolvingMetadata } from "next"
 import {
-    fetchSlaveBlogDetails,
-    fetchNeetBlogDetails,
+    fetchSlaveBlogList,
+    fetchNeetBlogList,
     countSlavePage,
     countNeetPage,
 } from "@/services/blog"
@@ -105,17 +105,17 @@ export default async function BlogPage({
 }) {
     const { blog, page } = params
     const pageInt = parseInt(page)
-    let blogDetails: Blog[] = []
+    let blogList: Blog[] = []
     if (blog !== "neet-blog") {
-        blogDetails = await fetchSlaveBlogDetails(10, (pageInt - 1) * 10)
+        blogList = await fetchSlaveBlogList(10, (pageInt - 1) * 10)
     } else {
-        blogDetails = await fetchNeetBlogDetails(10, (pageInt - 1) * 10)
+        blogList = await fetchNeetBlogList(10, (pageInt - 1) * 10)
     }
 
     return (
         <div>
             {blog === "neet-blog" ? <NeetTop /> : <SlaveTop />}
-            <CardList blogs={blogDetails} />
+            <CardList blogs={blogList} />
         </div>
     )
 }
