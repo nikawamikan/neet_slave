@@ -8,13 +8,11 @@ import {
     mamelon,
     kimberalla,
     dotGothic16,
-    mRound,
 } from "@/config/fonts"
 import { Providers } from "./providers"
 import { Navbar } from "@/components/navbar"
 import { Link } from "@nextui-org/link"
 import clsx from "clsx"
-import { dot } from "node:test/reporters"
 
 // すべてキャッシュからデータを取得するようにするハズです。
 export const fetchCache = "only-cache"
@@ -53,8 +51,7 @@ export default function RootLayout({
                     makinas.variable,
                     fontSans.variable,
                     kimberalla.variable,
-                    dotGothic16.variable,
-                    mRound.variable
+                    dotGothic16.variable
                 )}
             >
                 <Providers
