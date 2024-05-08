@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import tocbot from "tocbot" // TODO: どうにかする
+import tocbot from "tocbot"
 import "@/styles/toc.css"
 
 export const TableOfContents: React.FC = () => {
