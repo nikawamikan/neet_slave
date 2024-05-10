@@ -15,8 +15,8 @@ export function BlogCardList({ blogs }: { blogs: Array<Blog> }) {
                     params={{
                         baseUrl:
                             blog.writer[0] === "slave"
-                                ? siteConfig.siteItems.slaveBlog
-                                : siteConfig.siteItems.neetBlog,
+                                ? siteConfig.siteItems.postPage.slaveBlog
+                                : siteConfig.siteItems.postPage.neetBlog,
                         id: blog.id,
                         imageUrl: blog.thumbnail.url,
                         title: blog.title,

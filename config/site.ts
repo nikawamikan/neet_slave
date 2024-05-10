@@ -23,8 +23,10 @@ export const siteConfig = {
         },
     ],
     siteItems: {
-        slaveBlog: "/slave-blog/post",
-        neetBlog: "/neet-blog/post",
+        postPage: {
+            slaveBlog: "/slave-blog/post",
+            neetBlog: "/neet-blog/post",
+        },
     },
     links: {
         github: "https://github.com/nextui-org/nextui",
