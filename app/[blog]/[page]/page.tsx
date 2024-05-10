@@ -1,20 +1,16 @@
 import { title } from "@/components/primitives"
 import type { Metadata, ResolvingMetadata } from "next"
-import {
-    fetchSlaveBlogList,
-    fetchNeetBlogList,
-    countSlavePage,
-    countNeetPage,
-} from "@/services/blog"
+import { fetchBlogList, countPage } from "@/services/blog"
 import { BlogCard } from "@/components/blog-card"
 import { Blog } from "@/types/microcms"
 import React from "react"
 import { siteConfig } from "@/config/site"
 import { GenerateOGPImage } from "@/lib/ogpImage"
+import { Pagination } from "@/components/pagination"
 
 export async function generateStaticParams() {
-    const pageSlaveCount = await countSlavePage()
-    const pageNeetCount = await countNeetPage()
+    const pageSlaveCount = await countPage("slave")
+    const pageNeetCount = await countPage("neet")
     const slavePages = Array.from({ length: pageSlaveCount }, (_, i) => ({
         blog: "slave-blog",
         page: (i + 1).toString(),
@@ -106,16 +102,23 @@ export default async function BlogPage({
     const { blog, page } = params
     const pageInt = parseInt(page)
     let blogList: Blog[] = []
+    let pageCount = 0
     if (blog !== "neet-blog") {
-        blogList = await fetchSlaveBlogList(10, (pageInt - 1) * 10)
+        blogList = await fetchBlogList("slave", 10, (pageInt - 1) * 10)
+        pageCount = await countPage("slave")
     } else {
-        blogList = await fetchNeetBlogList(10, (pageInt - 1) * 10)
+        blogList = await fetchBlogList("neet", 10, (pageInt - 1) * 10)
+        pageCount = await countPage("neet")
     }
-
     return (
         <div>
-            {blog === "neet-blog" ? <NeetTop /> : <SlaveTop />}
-            <CardList blogs={blogList} />
+            <div className="inline-block max-w-7xl justify-center text-center">
+                {blog === "neet-blog" ? <NeetTop /> : <SlaveTop />}
+                <CardList blogs={blogList} />
+            </div>
+            <div className="mt-12 grid place-content-center">
+                <Pagination pageCount={pageCount} />
+            </div>
         </div>
     )
 }
