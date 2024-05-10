@@ -1,20 +1,15 @@
 import { title } from "@/components/primitives"
 import type { Metadata, ResolvingMetadata } from "next"
-import {
-    fetchSlaveBlogListByTag,
-    fetchNeetBlogListByTag,
-    fetchSlaveBlogTags,
-    fetchNeetBlogTags,
-} from "@/services/blog"
-import { BlogCard } from "@/components/blog-card"
+import { fetchBlogTags, fetchBlogListByTag } from "@/services/blog"
+import { BlogCardList } from "@/components/blog-card-list"
 import { Blog } from "@/types/microcms"
 import React from "react"
 import { siteConfig } from "@/config/site"
 import { GenerateOGPImage } from "@/lib/ogpImage"
 
 export async function generateStaticParams() {
-    const slaveBlogTags = await fetchSlaveBlogTags()
-    const neetBlogTags = await fetchNeetBlogTags()
+    const slaveBlogTags = await fetchBlogTags("slave")
+    const neetBlogTags = await fetchBlogTags("neet")
     const slavePages = slaveBlogTags.map((tag) => ({
         blog: "slave-blog",
         tag: tag.id,
@@ -54,32 +49,6 @@ export async function generateMetadata({
     }
 }
 
-function CardList({ blogs }: { blogs: Array<Blog> }) {
-    if (blogs.length === 0) {
-        return <p>記事がありません</p>
-    }
-
-    return (
-        <div className="grid grid-cols-1 gap-4 pt-20 md:grid-cols-2 lg:grid-cols-3">
-            {blogs.map((blog) => (
-                <BlogCard
-                    key={blog.id}
-                    params={{
-                        baseUrl:
-                            blog.writer[0] === "nikawamikan"
-                                ? siteConfig.siteItems.slaveBlog
-                                : siteConfig.siteItems.neetBlog,
-                        id: blog.id,
-                        imageUrl: blog.thumbnail.url,
-                        title: blog.title,
-                        date: blog.publishedAt,
-                    }}
-                />
-            ))}
-        </div>
-    )
-}
-
 function SlaveTop() {
     return (
         <div>
@@ -106,9 +75,9 @@ export default async function BlogPage({
     const { blog, tag } = params
     let blogList: Blog[] = []
     if (blog !== "neet-blog") {
-        blogList = await fetchSlaveBlogListByTag(tag)
+        blogList = await fetchBlogListByTag("slave", tag)
     } else {
-        blogList = await fetchNeetBlogListByTag(tag)
+        blogList = await fetchBlogListByTag("neet", tag)
     }
     console.log(blogList)
 
@@ -124,7 +93,7 @@ export default async function BlogPage({
     return (
         <div>
             {blog === "neet-blog" ? <NeetTop /> : <SlaveTop />}
-            <CardList blogs={blogList} />
+            <BlogCardList blogs={blogList} />
         </div>
     )
 }
