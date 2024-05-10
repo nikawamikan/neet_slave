@@ -1,15 +1,11 @@
-import {
-    fetchSlaveBlogIds,
-    fetchNeetBlogIds,
-    fetchBlogContent,
-} from "@/services/blog"
+import { fetchBlogIds, fetchBlogContent } from "@/services/blog"
 import { title, subtitle } from "@/components/primitives"
 import { BlogContent } from "@/components/blog-content"
 import { toJpDateStr } from "@/lib/date"
 
 export async function generateStaticParams() {
-    const slaveBlogIds = await fetchSlaveBlogIds()
-    const neetBlogIds = await fetchNeetBlogIds()
+    const slaveBlogIds = await fetchBlogIds("slave")
+    const neetBlogIds = await fetchBlogIds("neet")
 
     return slaveBlogIds
         .map((contentId) => ({ id: contentId, blog: "slave-blog" }))
