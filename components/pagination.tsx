@@ -9,15 +9,15 @@ type Prop = {
 }
 
 export function Pagination({ pageCount }: Prop) {
-    // 現在のPATHを取得
-    const pathname = usePathname()
+    // 現在のPATHを配列で取得
+    const pathname = usePathname().split("/")
     // ページ数を取得
-    const page = Number(last(pathname.split("/")))
+    const page = Number(pathname.pop())
 
     const router = useRouter()
 
     const handleChange = (page: number) => {
-        router.push(`/slave-blog/${page}`)
+        router.push(`/${pathname.join("/")}/${page}`)
     }
 
     return (
