@@ -5,18 +5,15 @@ import { Image } from "@/components/image"
 // import { Image } from "@nextui-org/image"
 import NextLink from "next/link"
 
-export function BlogCard({
-    params,
-}: {
-    params: {
-        baseUrl: string
-        id: string
-        imageUrl: string
-        title: string
-        date: string
-    }
-}) {
-    const { baseUrl, id, imageUrl, title, date } = params
+type Prop = {
+    baseUrl: string
+    id: string
+    imageUrl: string
+    title: string
+    date: string
+}
+
+export function BlogCard({ baseUrl, id, imageUrl, title, date }: Prop) {
     return (
         <NextLink href={`${baseUrl}/${id}`} passHref>
             <Card className="py-4">
