@@ -12,16 +12,15 @@ export function BlogCardList({ blogs }: { blogs: Array<Blog> }) {
             {blogs.map((blog) => (
                 <BlogCard
                     key={blog.id}
-                    params={{
-                        baseUrl:
-                            blog.writer[0] === "slave"
-                                ? siteConfig.siteItems.postPage.slaveBlog
-                                : siteConfig.siteItems.postPage.neetBlog,
-                        id: blog.id,
-                        imageUrl: blog.thumbnail.url,
-                        title: blog.title,
-                        date: blog.publishedAt,
-                    }}
+                    baseUrl={
+                        blog.writer[0] === "slave"
+                            ? siteConfig.siteItems.postPage.slaveBlog
+                            : siteConfig.siteItems.postPage.neetBlog
+                    }
+                    id={blog.id}
+                    imageUrl={blog.thumbnail.url}
+                    title={blog.title}
+                    date={blog.publishedAt}
                 />
             ))}
         </div>
