@@ -7,7 +7,6 @@ import {
     noteSans,
     mamelon,
     kimberalla,
-    dotGothic16,
 } from "@/config/fonts"
 import { Providers } from "./providers"
 import { Navbar } from "@/components/navbar"
@@ -50,8 +49,7 @@ export default function RootLayout({
                     noteSans.variable,
                     makinas.variable,
                     fontSans.variable,
-                    kimberalla.variable,
-                    dotGothic16.variable
+                    kimberalla.variable
                 )}
             >
                 <Providers
