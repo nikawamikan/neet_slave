@@ -14,6 +14,7 @@ export interface Thumbnail {
 
 export interface Tag extends Base {
     name: string // タグ名
+    description: string // 説明
 }
 
 export interface Blog extends Base {
@@ -23,4 +24,5 @@ export interface Blog extends Base {
     tags: Tag[] // タグ
     writer: string[] // 著者
     thumbnail: Thumbnail // サムネイル
+    relation: Blog[] // 関連記事
 }
