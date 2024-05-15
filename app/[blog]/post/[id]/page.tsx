@@ -112,6 +112,24 @@ export default async function Page({
                         <span className={subtitle()}>{data.description}</span>
                         <BlogContent data={data} />
                     </div>
+                    <div>
+                        <div>
+                            <h2 className={subtitle()}>関連記事</h2>
+                        </div>
+                        <div>
+                            {/* 関連記事要素をここに入れる */}
+                            {data.relation?.map((blog) => (
+                                <BlogCard
+                                    key={blog.id}
+                                    baseUrl={basePageUrl}
+                                    id={blog.id}
+                                    imageUrl={blog.thumbnail.url}
+                                    title={blog.title}
+                                    date={blog.publishedAt}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
                 <div className="hidden basis-0 md:inline md:basis-1/4 ">
                     <TableOfContents />
