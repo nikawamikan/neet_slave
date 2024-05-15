@@ -9,22 +9,37 @@ import {
     NavbarItem,
     NavbarMenuItem,
 } from "@nextui-org/navbar"
+import { Image } from "@nextui-org/image"
+
 import { ThemeSwitch } from "@/components/theme-switch"
 
 import { link as linkStyles } from "@nextui-org/theme"
-import { useReducer } from "react"
+import { useReducer, useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import NextLink from "next/link"
 import clsx from "clsx"
 
 import { Logo } from "@/components/icons"
+import { isContext } from "vm"
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useReducer(
         (current: boolean) => !current,
         false
     )
+    // blogのiconをパス名で判定して表示を変える
+
+    const pathname = usePathname()
+    const [blogIcon, setBlogIcon] = useState("icon.svg")
+    useEffect(() => {
+        if (pathname.includes("/slave")) {
+            setBlogIcon("neet.svg")
+        } else {
+            setBlogIcon("icon.svg")
+        }
+    }, [pathname])
 
     const menu = siteConfig.navItems.map((item) => (
         <NavbarItem key={item.href}>
@@ -55,7 +70,7 @@ export const Navbar = () => {
                         className="flex items-center justify-start gap-1"
                         href="/"
                     >
-                        <Logo />
+                        <Image alt="test" src={blogIcon} height={15} />
                         <p className="font-bold text-inherit">Slave & Neet</p>
                     </NextLink>
                 </NavbarBrand>
