@@ -21,9 +21,6 @@ import { siteConfig } from "@/config/site"
 import NextLink from "next/link"
 import clsx from "clsx"
 
-import { Logo } from "@/components/icons"
-import { isContext } from "vm"
-
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useReducer(
         (current: boolean) => !current,
@@ -33,11 +30,25 @@ export const Navbar = () => {
 
     const pathname = usePathname()
     const [blogIcon, setBlogIcon] = useState("icon.svg")
+    const [blogTitle, setBlogTitle] = useState(<>Slave & Neet</>)
     useEffect(() => {
         if (pathname.includes("/slave")) {
-            setBlogIcon("neet.svg")
+            setBlogIcon("/icon.svg")
+            // 打ち消し線を入れて文字色を薄くする
+            setBlogTitle(
+                <>
+                    Slave <s className="text-primary-100">& Neet</s>
+                </>
+            )
+        } else if (pathname.includes("/neet")) {
+            setBlogIcon("/neet.svg")
+            setBlogTitle(
+                <>
+                    <s className="text-primary-100">Slave &</s> Neet
+                </>
+            )
         } else {
-            setBlogIcon("icon.svg")
+            setBlogTitle(<>Slave & Neet</>)
         }
     }, [pathname])
 
@@ -70,13 +81,19 @@ export const Navbar = () => {
                         className="flex items-center justify-start gap-1"
                         href="/"
                     >
-                        <Image alt="test" src={blogIcon} height={15} />
-                        <p className="font-bold text-inherit">Slave & Neet</p>
+                        <Image
+                            alt="Slave & Neet"
+                            radius="none"
+                            src={blogIcon}
+                            width={48}
+                            className="w-12"
+                        />
+                        <p className="font-bold text-inherit">{blogTitle}</p>
                     </NextLink>
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent className="sm:basis-1/2" justify="center">
+            <NavbarContent className="md:basis-1/2" justify="center">
                 <ul className="ml-2 hidden justify-start gap-4 md:flex">
                     {menu}
                 </ul>
