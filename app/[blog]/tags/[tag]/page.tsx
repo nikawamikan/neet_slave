@@ -52,8 +52,7 @@ export async function generateMetadata({
 function SlaveTop() {
     return (
         <div>
-            <h1 className={title()}>社畜ブログ</h1>
-            <p>自称社畜がなんだかんだいろいろ言います</p>
+            <h1 className={title()}>社畜のタグ検索ページ</h1>
         </div>
     )
 }
@@ -61,8 +60,7 @@ function SlaveTop() {
 function NeetTop() {
     return (
         <div>
-            <h1 className={title()}>ニートブログ</h1>
-            <p>自称ニートがなんだかんだいろいろ言います</p>
+            <h1 className={title()}>ニートのタグ検索ページ</h1>
         </div>
     )
 }
@@ -89,10 +87,18 @@ export default async function BlogPage({
     const tagObj = uniqueTags.find((tagData) => tagData.id === tag)
     // uniqueTagsからtagObjを削除
     const filteredTags = uniqueTags.filter((tagData) => tagData.id !== tag)
+    console.log(tagObj)
 
     return (
         <div>
             {blog === "neet-blog" ? <NeetTop /> : <SlaveTop />}
+            <div className="my-8 text-left">
+                <div>
+                    <p className={title()}>{tagObj?.name}</p> <p> とは？</p>
+                </div>
+                <p className="mt-4">{tagObj?.description}</p>
+            </div>
+
             <BlogCardList blogs={blogList} />
         </div>
     )
