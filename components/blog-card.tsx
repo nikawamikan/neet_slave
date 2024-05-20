@@ -4,6 +4,7 @@ import { Card, CardHeader, CardBody } from "@nextui-org/card"
 import { Image } from "@/components/image"
 // import { Image } from "@nextui-org/image"
 import NextLink from "next/link"
+import { toJpDateStr } from "@/lib/date"
 
 type Prop = {
     baseUrl: string
@@ -27,7 +28,9 @@ export function BlogCard({
             <Card className="py-4">
                 <CardHeader className="flex-col items-start px-4 pb-0 pt-2">
                     {/* ここらへんにタグつける */}
-                    <small className="text-default-500">{date}</small>
+                    <small className="text-default-500">
+                        {toJpDateStr(date)}
+                    </small>
                     <h4 className="text-large font-bold">{title}</h4>
                 </CardHeader>
                 <CardBody className="overflow-visible py-2">
@@ -71,7 +74,7 @@ export function SmallBlogCard({
                             <div className="flex-col items-start px-4 pb-0 pt-2">
                                 {/* ここらへんにタグつける */}
                                 <small className="text-default-500">
-                                    {date}
+                                    {toJpDateStr(date)}
                                 </small>
                                 <h4 className="text-large font-bold">
                                     {title}
