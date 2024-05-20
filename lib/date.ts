@@ -4,5 +4,8 @@ export function toDate(dateString: string): Date {
 
 export function toJpDateStr(dateString: string): string {
     const date = toDate(dateString)
-    return date.toLocaleDateString("ja-JP")
+    return date.toLocaleDateString("ja-JP", {
+        dateStyle: "short",
+        timeZone: "Asia/Tokyo",
+    })
 }
