@@ -30,29 +30,62 @@ type prevNextPrep = {
 
 function PrevNext({ baseUrl, prevContent, nextContent }: prevNextPrep) {
     return (
-        <div className="mt-8 flex flex-wrap justify-between">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
             {prevContent ? (
-                <SmallBlogCard
-                    baseUrl={baseUrl}
-                    id={prevContent.id}
-                    imageUrl={prevContent.thumbnail.url}
-                    title={prevContent.title}
-                    date={prevContent.publishedAt}
-                />
+                <div className="m-2">
+                    <h2 className={subtitle()}>前の記事</h2>
+                    <SmallBlogCard
+                        baseUrl={baseUrl}
+                        id={prevContent.id}
+                        imageUrl={prevContent.thumbnail.url}
+                        title={prevContent.title}
+                        date={prevContent.publishedAt}
+                    />
+                </div>
             ) : (
                 <div />
             )}
             {nextContent ? (
-                <SmallBlogCard
-                    baseUrl={baseUrl}
-                    id={nextContent.id}
-                    imageUrl={nextContent.thumbnail.url}
-                    title={nextContent.title}
-                    date={nextContent.publishedAt}
-                />
+                <div className="m-2">
+                    <h2 className={subtitle()}>次の記事</h2>
+                    <SmallBlogCard
+                        baseUrl={baseUrl}
+                        id={nextContent.id}
+                        imageUrl={nextContent.thumbnail.url}
+                        title={nextContent.title}
+                        date={nextContent.publishedAt}
+                    />
+                </div>
             ) : (
                 <div />
             )}
+        </div>
+    )
+}
+
+function relationalBlogCard(data: Blog, basePageUrl: string) {
+    if (!data.relation || data.relation.length === 0) {
+        return <div />
+    }
+
+    return (
+        <div>
+            <div>
+                <h2 className={subtitle()}>関連記事</h2>
+            </div>
+            <div className="max-w-md">
+                {data.relation?.map((blog) => (
+                    <SmallBlogCard
+                        className="mb-4"
+                        key={blog.id}
+                        baseUrl={basePageUrl}
+                        id={blog.id}
+                        imageUrl={blog.thumbnail.url}
+                        title={blog.title}
+                        date={blog.publishedAt}
+                    />
+                ))}
+            </div>
         </div>
     )
 }
@@ -112,24 +145,7 @@ export default async function Page({
                         <span className={subtitle()}>{data.description}</span>
                         <BlogContent data={data} />
                     </div>
-                    <div>
-                        <div>
-                            <h2 className={subtitle()}>関連記事</h2>
-                        </div>
-                        <div className="max-w-md">
-                            {data.relation?.map((blog) => (
-                                <SmallBlogCard
-                                    className="mb-4"
-                                    key={blog.id}
-                                    baseUrl={basePageUrl}
-                                    id={blog.id}
-                                    imageUrl={blog.thumbnail.url}
-                                    title={blog.title}
-                                    date={blog.publishedAt}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    {relationalBlogCard(data, basePageUrl)}
                 </div>
                 <div className="hidden basis-0 md:inline md:basis-1/4 ">
                     <TableOfContents />

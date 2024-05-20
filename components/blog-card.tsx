@@ -55,7 +55,7 @@ export function SmallBlogCard({
 }: Prop) {
     return (
         <NextLink href={`${baseUrl}/${id}`} passHref>
-            <Card className={`py-4 ${className}`}>
+            <Card className={`min-h-40 py-4 ${className}`}>
                 <CardBody className="overflow-visible py-2">
                     <div className="flex flex-row">
                         <div className="basis-1/4">
