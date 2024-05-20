@@ -4,7 +4,7 @@ import { BlogContent } from "@/components/blog-content"
 import { toJpDateStr } from "@/lib/date"
 import { TagChip } from "@/components/tag-chip"
 import { siteConfig } from "@/config/site"
-import { BlogCard } from "@/components/blog-card"
+import { BlogCard, SmallBlogCard } from "@/components/blog-card"
 import { Blog } from "@/types/microcms"
 import { TableOfContents } from "@/components/testtoc"
 
@@ -30,9 +30,9 @@ type prevNextPrep = {
 
 function PrevNext({ baseUrl, prevContent, nextContent }: prevNextPrep) {
     return (
-        <div className="mt-8 flex justify-between">
+        <div className="mt-8 flex flex-wrap justify-between">
             {prevContent ? (
-                <BlogCard
+                <SmallBlogCard
                     baseUrl={baseUrl}
                     id={prevContent.id}
                     imageUrl={prevContent.thumbnail.url}
@@ -43,7 +43,7 @@ function PrevNext({ baseUrl, prevContent, nextContent }: prevNextPrep) {
                 <div />
             )}
             {nextContent ? (
-                <BlogCard
+                <SmallBlogCard
                     baseUrl={baseUrl}
                     id={nextContent.id}
                     imageUrl={nextContent.thumbnail.url}
@@ -93,7 +93,7 @@ export default async function Page({
     return (
         <>
             <div className="flex max-w-7xl gap-4 py-8 md:py-10">
-                <div className="inline-block  basis-full justify-center text-left md:basis-3/4 ">
+                <div className="max-w-full basis-full justify-center md:basis-3/4">
                     <h1 className={title()}>{data.title}</h1>
                     <div className="my-8 flex flex-col">
                         <span>公開日: {toJpDateStr(data.publishedAt)}</span>
@@ -116,10 +116,10 @@ export default async function Page({
                         <div>
                             <h2 className={subtitle()}>関連記事</h2>
                         </div>
-                        <div>
-                            {/* 関連記事要素をここに入れる */}
+                        <div className="max-w-md">
                             {data.relation?.map((blog) => (
-                                <BlogCard
+                                <SmallBlogCard
+                                    className="mb-4"
                                     key={blog.id}
                                     baseUrl={basePageUrl}
                                     id={blog.id}
