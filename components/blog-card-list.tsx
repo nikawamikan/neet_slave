@@ -17,10 +17,7 @@ export function BlogCardList({ blogs }: { blogs: Array<Blog> }) {
                             ? siteConfig.siteItems.postPage.slaveBlog
                             : siteConfig.siteItems.postPage.neetBlog
                     }
-                    id={blog.id}
-                    imageUrl={blog.thumbnail.url}
-                    title={blog.title}
-                    date={blog.publishedAt}
+                    blog={blog}
                 />
             ))}
         </div>

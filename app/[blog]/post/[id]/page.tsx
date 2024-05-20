@@ -34,13 +34,7 @@ function PrevNext({ baseUrl, prevContent, nextContent }: prevNextPrep) {
             {prevContent ? (
                 <div className="m-2">
                     <h2 className={subtitle()}>前の記事</h2>
-                    <SmallBlogCard
-                        baseUrl={baseUrl}
-                        id={prevContent.id}
-                        imageUrl={prevContent.thumbnail.url}
-                        title={prevContent.title}
-                        date={prevContent.publishedAt}
-                    />
+                    <SmallBlogCard baseUrl={baseUrl} blog={prevContent} />
                 </div>
             ) : (
                 <div />
@@ -48,13 +42,7 @@ function PrevNext({ baseUrl, prevContent, nextContent }: prevNextPrep) {
             {nextContent ? (
                 <div className="m-2">
                     <h2 className={subtitle()}>次の記事</h2>
-                    <SmallBlogCard
-                        baseUrl={baseUrl}
-                        id={nextContent.id}
-                        imageUrl={nextContent.thumbnail.url}
-                        title={nextContent.title}
-                        date={nextContent.publishedAt}
-                    />
+                    <SmallBlogCard baseUrl={baseUrl} blog={nextContent} />
                 </div>
             ) : (
                 <div />
@@ -79,10 +67,7 @@ function relationalBlogCard(data: Blog, basePageUrl: string) {
                         className="mb-4"
                         key={blog.id}
                         baseUrl={basePageUrl}
-                        id={blog.id}
-                        imageUrl={blog.thumbnail.url}
-                        title={blog.title}
-                        date={blog.publishedAt}
+                        blog={blog}
                     />
                 ))}
             </div>
