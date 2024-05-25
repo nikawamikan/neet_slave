@@ -29,7 +29,7 @@ export const Navbar = () => {
     // blogのiconをパス名で判定して表示を変える
 
     const pathname = usePathname()
-    const [blogIcon, setBlogIcon] = useState("icon.svg")
+    const [blogIcon, setBlogIcon] = useState("/icon.svg")
     const [blogTitle, setBlogTitle] = useState(<>Slave & Neet</>)
     useEffect(() => {
         if (pathname.includes("/slave")) {
