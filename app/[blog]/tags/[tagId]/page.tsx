@@ -1,6 +1,11 @@
 import { title } from "@/components/primitives"
 import type { Metadata, ResolvingMetadata } from "next"
-import { fetchBlogTags, fetchBlogListByTag } from "@/services/blog"
+import {
+    fetchBlogTags,
+    fetchBlogListByTag,
+    fetchBlogTagMap,
+    writers,
+} from "@/services/blog"
 import { BlogCardList } from "@/components/blog-card-list"
 import { Blog } from "@/types/microcms"
 import React from "react"
@@ -12,11 +17,11 @@ export async function generateStaticParams() {
     const neetBlogTags = await fetchBlogTags("neet")
     const slavePages = slaveBlogTags.map((tag) => ({
         blog: "slave-blog",
-        tag: tag.id,
+        tagId: tag.id,
     }))
     const neetPages = neetBlogTags.map((tag) => ({
         blog: "neet-blog",
-        tag: tag.id,
+        tagId: tag.id,
     }))
 
     return slavePages.concat(neetPages)
@@ -68,35 +73,27 @@ function NeetTop() {
 export default async function BlogPage({
     params,
 }: {
-    params: { tag: string; blog: string }
+    params: { tagId: string; blog: string }
 }) {
-    const { blog, tag } = params
-    let blogList: Blog[] = []
-    if (blog !== "neet-blog") {
-        blogList = await fetchBlogListByTag("slave", tag)
-    } else {
-        blogList = await fetchBlogListByTag("neet", tag)
+    const { blog, tagId } = params
+    let writer: writers = "slave"
+    if (blog === "neet-blog") {
+        writer = "neet"
     }
-    console.log(blogList)
-
-    // blogList から一意のタグを取得
-    const tags = blogList.map((blog) => blog.tags).flat()
-    // 重複を削除
-    const uniqueTags = Array.from(new Set(tags.map((tag) => tag)))
-    // tagはIDなので、IDからTAGオブジェクトをPOPする
-    const tagObj = uniqueTags.find((tagData) => tagData.id === tag)
-    // uniqueTagsからtagObjを削除
-    const filteredTags = uniqueTags.filter((tagData) => tagData.id !== tag)
-    console.log(tagObj)
+    const blogList = await fetchBlogListByTag(writer, tagId)
+    const thisTag = (await fetchBlogTagMap(writer))[tagId]
+    const filteredTags = (await fetchBlogTags(writer)).filter(
+        (tagData) => tagData.id !== tagId
+    )
 
     return (
         <div>
             {blog === "neet-blog" ? <NeetTop /> : <SlaveTop />}
             <div className="my-8 text-left">
                 <div>
-                    <p className={title()}>{tagObj?.name}</p> <p> とは？</p>
+                    <p className={title()}>{thisTag?.name}</p> <p> とは？</p>
                 </div>
-                <p className="mt-4">{tagObj?.description}</p>
+                <p className="mt-4">{thisTag?.description}</p>
             </div>
 
             <BlogCardList blogs={blogList} />
