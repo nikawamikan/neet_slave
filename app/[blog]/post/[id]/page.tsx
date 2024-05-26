@@ -61,10 +61,10 @@ function relationalBlogCard(data: Blog, basePageUrl: string) {
             <div>
                 <h2 className={subtitle()}>関連記事</h2>
             </div>
-            <div className="max-w-md">
-                {data.relation?.map((blog) => (
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+                {data.relation!.map((blog) => (
                     <SmallBlogCard
-                        className="mb-4"
+                        className="m-2"
                         key={blog.id}
                         baseUrl={basePageUrl}
                         blog={blog}
