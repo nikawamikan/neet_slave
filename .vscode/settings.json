@@ -3,4 +3,5 @@
         "*.css": "tailwindcss"
     },
     "typescript.tsdk": "node_modules/typescript/lib",
+    "prettier.tabWidth": 4,
 }
