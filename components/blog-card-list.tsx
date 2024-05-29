@@ -8,7 +8,7 @@ export function BlogCardList({ blogs }: { blogs: Array<Blog> }) {
     }
 
     return (
-        <div className="grid grid-cols-1 gap-4 pt-20 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 pt-20 md:grid-cols-2 xl:grid-cols-3">
             {blogs.map((blog) => (
                 <BlogCard
                     key={blog.id}
