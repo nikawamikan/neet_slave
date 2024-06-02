@@ -43,7 +43,7 @@ export function BlogCard({ blog, baseUrl, className }: Prop) {
                             </div>
                             <small>{toJpDateStr(blog.publishedAt)}</small>
                         </div>
-                        <p className="line-clamp-2 h-[4em] w-full py-2 text-left">
+                        <p className="line-clamp-2 h-[4em] w-full py-3 text-left">
                             {blog.description}
                         </p>
                     </CardFooter>
