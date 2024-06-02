@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, CardHeader, CardBody } from "@nextui-org/card"
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card"
 // import Image from "next/image"
 import { Image } from "@/components/image"
 // import { Image } from "@nextui-org/image"
@@ -17,38 +17,37 @@ type Prop = {
 export function BlogCard({ blog, baseUrl, className }: Prop) {
     return (
         <NextLink className={className} href={`${baseUrl}/${blog.id}`} passHref>
-            <Card className="flex w-full py-4" isHoverable>
-                <CardBody className="place-items-center overflow-visible py-2">
-                    <div className="relative">
-                        <Image
-                            alt="Card background "
-                            className="h-48 rounded-xl object-cover"
-                            src={blog.thumbnail.url}
-                            width={400}
-                            height={192}
-                        />
-                        <h4 className="absolute left-1 top-1 z-10 rounded-full bg-primary px-2 text-large font-bold text-primary-foreground">
+            <Card
+                className="flex max-w-96 bg-default-100 bg-opacity-20"
+                isHoverable
+                isFooterBlurred
+                isPressable
+            >
+                <div>
+                    <Image
+                        alt="Card background"
+                        className="h-52 p-2"
+                        src={blog.thumbnail.url}
+                        width={400}
+                        height={192}
+                    />
+                    <CardFooter className="flex w-full flex-auto flex-col bg-primary-100  bg-opacity-50 px-4 py-2 pb-0">
+                        <h2 className="pb-2 text-large font-bold">
                             {blog.title}
-                        </h4>
-                    </div>
-                </CardBody>
-                <CardHeader className="flex w-full flex-auto flex-col px-4 pb-0 pt-2">
-                    <div className="flex w-full justify-between">
-                        <div className="">
-                            {blog.tags.map((tag) => (
-                                <TagChip key={tag.id} tag={tag} />
-                            ))}
+                        </h2>
+                        <div className="flex w-full justify-between">
+                            <div className="">
+                                {blog.tags.map((tag) => (
+                                    <TagChip key={tag.id} tag={tag} />
+                                ))}
+                            </div>
+                            <small>{toJpDateStr(blog.publishedAt)}</small>
                         </div>
-                        <small className="text-default-500">
-                            {toJpDateStr(blog.publishedAt)}
-                        </small>
-                    </div>
-                    <div>
-                        <p className="text-left text-default-500">
+                        <p className="line-clamp-2 h-[4em] w-full py-2 text-left">
                             {blog.description}
                         </p>
-                    </div>
-                </CardHeader>
+                    </CardFooter>
+                </div>
             </Card>
         </NextLink>
     )
@@ -58,7 +57,12 @@ export function BlogCard({ blog, baseUrl, className }: Prop) {
 export function SmallBlogCard({ blog, baseUrl, className }: Prop) {
     return (
         <NextLink href={`${baseUrl}/${blog.id}`} passHref>
-            <Card className={`min-h-40 py-4 ${className}`} isHoverable>
+            isPressable
+            <Card
+                className={`min-h-40 py-4 ${className}`}
+                isHoverable
+                isPressable
+            >
                 <CardBody className="overflow-visible py-2">
                     <div className="flex flex-row">
                         <div className="basis-1/4">
